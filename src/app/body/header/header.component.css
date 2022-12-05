@@ -1,0 +1,52 @@
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  background: #003165;
+  color: #fff;
+  margin-bottom: auto;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-card img {
+  border-width: 0;
+  width: 100%;
+  height: 250px;
+  opacity: 0.5;
+  background-size: cover;
+}
+
+.mat-card h1 {
+  font-size: 42px;
+  color: white;
+  line-height: 90px;
+  font-weight: 150px;
+}
+
+.mat-card header {
+  height: 100px;
+  width: 450px;
+  background-color: rgb(42, 95, 149);
+  opacity: 0.90;
+  text-align: center;
+  overflow: hidden;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+}

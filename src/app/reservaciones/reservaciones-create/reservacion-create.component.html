@@ -1,0 +1,47 @@
+<h2>Nueva Reservacion</h2>
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSaveReservacion()" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+      matInput type="text"
+      formControlName="title"
+      placeholder="Hotel">
+      <mat-error *ngIf="form.get('title').invalid"> Por favor ingrese un titulo</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput type="text"
+      formControlName="solicitante"
+      placeholder="Nombre del huésped">
+      <mat-error *ngIf="form.get('solicitante').invalid"> Por favor ingrese un nombre</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput type="number"
+      maxlength="1" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+      formControlName="habitaciones"
+      placeholder="No. habitaciones">
+      <mat-error *ngIf="form.get('habitaciones').invalid"> Por favor ingrese número de habitaciones</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput type="text"
+      formControlName="direccion"
+      placeholder="Dirección">
+      <mat-error *ngIf="form.get('direccion').invalid"> Por favor ingrese una dirección</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput type="text"
+      maxlength="10"
+      formControlName="telefonoSol"
+      placeholder="Teléfono">
+      <mat-error *ngIf="form.get('telefonoSol').invalid"> Por favor ingrese un teléfono</mat-error>
+    </mat-form-field>
+    <button
+    mat-raised-button
+    color="primary"
+    type="submit">Guardar Reservación</button>
+  </form>
+</mat-card>

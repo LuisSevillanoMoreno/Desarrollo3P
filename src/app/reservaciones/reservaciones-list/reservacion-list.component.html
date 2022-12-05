@@ -1,0 +1,18 @@
+<h2>Reservaciones</h2>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi = "true" *ngIf='reservaciones.length > 0 && !isLoading'>
+  <mat-expansion-panel *ngFor="let reservacion of reservaciones">
+    <mat-expansion-panel-header>
+      {{reservacion.solicitante}}
+    </mat-expansion-panel-header>
+    <p>{{reservacion.title}}</p>
+    <p>{{reservacion.habitaciones}}</p>
+    <p>{{reservacion.direccion}}</p>
+    <p>{{reservacion.telefonoSol}}</p>
+    <mat-action-row>
+      <a mat-button color="primary" [routerLink]="['/editR', reservacion.id]">EDITAR</a>
+      <button mat-button color="warn" (click)="Delete(reservacion.id)">ELIMINAR</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p  class = "info-text mat-body-1" *ngIf="reservaciones.length <= 0 && !isLoading"> No hay reservaciones </p>

@@ -1,0 +1,24 @@
+<h2>Nueva Opinión</h2>
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+      matInput type="text"
+      formControlName = "title"
+      placeholder="Titulo">
+      <mat-error *ngIf="form.get('title').invalid"> Por favor ingrese un titulo</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+      matInput rows="6"
+      formControlName="content"
+      placeholder="Contenido"> </textarea>
+      <mat-error *ngIf="form.get('content').invalid"> Por favor ingrese el contenido</mat-error>
+    </mat-form-field>
+    <button
+    mat-raised-button
+    color="primary"
+    type="submit">Guardar Post</button>
+  </form>
+</mat-card>

@@ -1,0 +1,26 @@
+<h2>Hoteles</h2>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi = "true" *ngIf='hoteles.length > 0 && !isLoading'>
+    <mat-card class="example-card" *ngFor="let hotel of hoteles">
+      <mat-card-header>
+        <mat-card-title>{{hotel.title}}</mat-card-title>
+      </mat-card-header>
+      <div class="post-image">
+        <img [src]="hotel.imagePath" [alt]="hotel.title">
+      </div>
+      <mat-card-content>
+        <p>
+          {{hotel.content}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class ="f">
+        <button mat-button (click)="Favorite()">FAVORITO</button>
+        <!--<button mat-button>RESERVAR</button>-->
+      </mat-card-actions>
+      <mat-action-row>
+        <a mat-button color="primary" [routerLink]="['/editH', hotel.id]">EDITAR</a>
+        <button mat-button color="warn" (click)="Delete(hotel.id)">ELIMINAR</button>
+      </mat-action-row>
+    </mat-card>
+</mat-accordion>
+<p  class = "info-text mat-body-1" *ngIf="hoteles.length <= 0 && !isLoading"> No hay hoteles agregados </p>

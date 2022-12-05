@@ -1,0 +1,31 @@
+:host{
+  display: block;
+  margin-top: 1rem;
+}
+
+.info-text{
+  text-align: center;
+}
+
+/*.example-card {
+  margin: 3px;
+  background-image: url('https://st2.depositphotos.com/5647624/43413/i/600/depositphotos_434132454-stock-photo-golden-board-or-signboard-for.jpg');
+  background-size: cover;
+
+}*/
+
+.f {
+  margin-block-end: 10px;
+  float: right;
+}
+
+h2{
+  font-size: x-large;
+  margin: 50px;
+  margin-top: 35px;
+  color:brown;
+}
+
+mat-spinner{
+  margin: auto;
+}

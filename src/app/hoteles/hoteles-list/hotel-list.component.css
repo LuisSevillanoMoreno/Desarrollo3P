@@ -1,0 +1,38 @@
+:host{
+  display: block;
+  margin-top: 1rem;
+}
+
+.info-text{
+  text-align: center;
+}
+
+.f {
+  margin-inline-end: 100px;
+  float: right;
+}
+
+h2{
+  font-size: x-large;
+  margin: 50px;
+  margin-top: 35px;
+  color:brown;
+}
+
+mat-card{
+  margin-block-end: 100px;
+}
+
+mat-spinner{
+  margin: auto;
+}
+
+.post-image{
+  width: 100%;
+
+}
+
+.post-image img{
+  width: 100%;
+  box-shadow: 1px 1px 5px rgba(0,0,0.5);
+}
