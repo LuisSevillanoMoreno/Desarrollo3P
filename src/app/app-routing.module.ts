@@ -6,6 +6,7 @@ import { HotelListComponent } from './hoteles/hoteles-list/hotel-list.component'
 import { HotelCreateComponent } from './hoteles/hoteles-create/hotel-create.component';
 import { ReservacionListComponent } from './reservaciones/reservaciones-list/reservacion-list.component';
 import { ReservacionCreateComponent } from './reservaciones/reservaciones-create/reservacion-create.component';
+import { FavListComponent} from './hoteles/hoteles-list/fav-list.component'
 
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
   {path: 'allRsv', component: ReservacionListComponent},
   {path: 'createR', component: ReservacionCreateComponent},
   {path: 'editR/:reservacionId', component: ReservacionCreateComponent},
-  {path: 'fav', component: HotelListComponent},
+  {path: 'fav', component: FavListComponent},
 ];
 
 @NgModule({

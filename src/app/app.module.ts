@@ -29,6 +29,7 @@ import { HotelService } from './hoteles/hotel.service';
 import { ReservacionCreateComponent } from './reservaciones/reservaciones-create/reservacion-create.component';
 import { ReservacionListComponent } from './reservaciones/reservaciones-list/reservacion-list.component';
 import { ReservacionService } from './reservaciones/reservacion.service';
+import { FavListComponent } from './hoteles/hoteles-list/fav-list.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { ReservacionService } from './reservaciones/reservacion.service';
     HotelListComponent,
     ReservacionCreateComponent,
     ReservacionListComponent,
+    FavListComponent
     //ShowApiComponent
 
   ],

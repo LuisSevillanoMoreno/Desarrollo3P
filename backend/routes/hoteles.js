@@ -30,7 +30,8 @@ router.post("", multer({storage: storage}).single("image"),(req, res, next)=>{
   const hotel = new Hotel({
     title: req.body.title,
     content: req.body.content,
-    imagePath: url + "/images/" + req.file.filename
+    imagePath: url + "/images/" + req.file.filename,
+    favorite: req.body.favorite
   });
   hotel.save().then(createdPost=>{ //post.save().then(createPost =>{ meter desde res.status postId: createPost._id})
   res.status(201).json({
@@ -52,7 +53,8 @@ router.put("/:id", multer({storage: storage}).single("image"), (req, res, next)=
   const hotel = {
     title: req.body.title,
     content: req.body.content,
-    imagePath: imagePath
+    imagePath: imagePath,
+    favorite: req.body.favorite
   };
   Hotel.updateOne({_id: req.params.id}, hotel).then(result=>{
     res.status(200).json({message: "Hotel updated Succesfully"});
@@ -86,18 +88,4 @@ router.delete("/:id",(req, res)=>{
     })
   })
 })
-
-router.get("/fav", (req, res, next) =>{
-  Hotel.find().then(documents =>{
-    res.status(200).json({
-      message:'Hoteles expuestas con éxito',
-      hoteles: documents
-
-    });
-  });
-});
-
-
-
-
 module.exports = router;

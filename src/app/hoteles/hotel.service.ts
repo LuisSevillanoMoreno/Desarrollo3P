@@ -21,6 +21,7 @@ export class HotelService{
         title: hotel.title,
         content: hotel.content,
         id: hotel._id,
+        favorite: hotel.favorite,
         imagePath: hotel.imagePath
       };
     });
@@ -32,7 +33,7 @@ export class HotelService{
   }
 
   getHotel(id: string){
-    return this.http.get<{_id: string, title: string, content: string, imagePath: string}>
+    return this.http.get<{_id: string, title: string, content: string, imagePath: string, favorite: string}>
     ("http://localhost:3000/api.hoteles/" + id)
   }
 
@@ -40,11 +41,12 @@ export class HotelService{
     return this.hotelesUpdate.asObservable();
   }
 
-  addHotel(title: string, content: string, image: File){
+  addHotel(title: string, content: string, image: File, favorite: string){
     const postData = new FormData();
     postData.append("title", title);
     postData.append("content", content);
     postData.append("image", image, title);
+    postData.append("favorite", favorite)
     //const hotel: Hotel = {id: null, title: title, content: content};
     this.http.post<{message: string, hotel: Hotel}>('http://localhost:3000/api.hoteles', postData) //agregar después de message postId: string
     .subscribe((responseData)=>{
@@ -53,7 +55,8 @@ export class HotelService{
         id: responseData.hotel.id,
         title: title,
         content: content,
-        imagePath: responseData.hotel.imagePath}
+        imagePath: responseData.hotel.imagePath,
+        favorite: "false" }
       this.hoteles.push(hotel); //antes de esta linea colocar post.id = id;
       this.hotelesUpdate.next([...this.hoteles]);
       this.router.navigate(["/all"])
@@ -72,17 +75,7 @@ export class HotelService{
     });
   }
 
-  favHotel(){
-    this.http.get<{message: string, hotel: Hotel}>('http://localhost:3000/api.hoteles/fav') //agregar después de message postId: string
-      var hotel: Hotel = {
-        id: hotel.id,
-        title: hotel.title,
-        content: hotel.content,
-        imagePath: hotel.imagePath}
-      this.hoteles.push(hotel); //antes de esta linea colocar post.id = id;
-    };
-
-  updateHotel(id: string, title: string, content: string, image: File | string){
+  updateFav(id: string, title: string, content: string, image: File | string, favorite: string){
     let postData: Hotel | FormData;
     if(typeof image === "object"){
       postData = new FormData();
@@ -90,12 +83,14 @@ export class HotelService{
       postData.append("title", title);
       postData.append("content", content);
       postData.append("image", (image), title);
+      postData.append("favorite", favorite);
     }else{
       postData = {
         id: id,
         title: title,
         content: content,
-        imagePath: image
+        imagePath: image,
+        favorite: favorite
       };
     }
     this.http.put('http://localhost:3000/api.hoteles/' + id, postData)
@@ -106,7 +101,44 @@ export class HotelService{
         id: id,
         title: title,
         content: content,
-        imagePath: ""
+        imagePath: "",
+        favorite: favorite
+      }
+      updateHotel[oldHotelIndex] = hotel
+      this.hoteles = updateHotel;
+      this.hotelesUpdate.next([...this.hoteles]);
+      this.router.navigate(["/fav"])
+    });
+    };
+
+  updateHotel(id: string, title: string, content: string, image: File | string, favorite: string){
+    let postData: Hotel | FormData;
+    if(typeof image === "object"){
+      postData = new FormData();
+      postData.append("id", id)
+      postData.append("title", title);
+      postData.append("content", content);
+      postData.append("image", (image), title);
+      postData.append("favorite", favorite)
+    }else{
+      postData = {
+        id: id,
+        title: title,
+        content: content,
+        imagePath: image,
+        favorite: favorite
+      };
+    }
+    this.http.put('http://localhost:3000/api.hoteles/' + id, postData)
+    .subscribe(response => {
+      const updateHotel = [...this.hoteles]
+      const oldHotelIndex = updateHotel.findIndex(p => p.id === id);
+      const hotel: Hotel = {
+        id: id,
+        title: title,
+        content: content,
+        imagePath: "",
+        favorite: favorite
       }
       updateHotel[oldHotelIndex] = hotel
       this.hoteles = updateHotel;

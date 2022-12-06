@@ -32,7 +32,8 @@ export class HotelCreateComponent implements OnInit{
       "title": new FormControl(null, {validators: [Validators.required, Validators.minLength(3)]}),
       "content": new FormControl(null, {validators: [Validators.required]}),
       "image" : new FormControl(null, {validators: [Validators.required],
-      asyncValidators: [mimeType]})
+      asyncValidators: [mimeType]}),
+      //"favorite": new FormControl(null, {validators: [Validators.required]}),
     })
     this.route.paramMap.subscribe((paramMap: ParamMap)=>{
       if(paramMap.has('hotelId')){
@@ -41,11 +42,12 @@ export class HotelCreateComponent implements OnInit{
         this.isLoading = true;
         this.hotelesService.getHotel(this.hotelId).subscribe(hotelData =>{
           this.isLoading = false;
-          this.hotel = {id: hotelData._id, title: hotelData.title, content: hotelData.content, imagePath: hotelData.imagePath}
+          this.hotel = {id: hotelData._id, title: hotelData.title, content: hotelData.content, imagePath: hotelData.imagePath, favorite: hotelData.favorite}
           this.form.setValue({
             title: this.hotel.title,
             content: this.hotel.content,
-            image: this.hotel.imagePath
+            image: this.hotel.imagePath,
+            favorite: this.hotel.favorite
           })
         })
       }else{
@@ -73,13 +75,14 @@ export class HotelCreateComponent implements OnInit{
     }
     this.isLoading = true;
     if(this.mode == "createH"){
-      this.hotelesService.addHotel(this.form.value.title, this.form.value.content, this.form.value.image);
+      this.hotelesService.addHotel(this.form.value.title, this.form.value.content, this.form.value.image, "False");
     }else{
       this.hotelesService.updateHotel(
         this.hotelId,
         this.form.value.title,
         this.form.value.content,
-        this.form.value.image
+        this.form.value.image,
+        "False"
       );
     }
 

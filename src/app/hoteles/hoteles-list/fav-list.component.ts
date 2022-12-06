@@ -5,12 +5,12 @@ import { HotelService } from "../hotel.service";
 
 @Component({
   selector: 'app-hotel-list',
-  templateUrl: './hotel-list.component.html',
+  templateUrl: './fav-list.component.html',
   styleUrls: ['./hotel-list.component.css']
 
 })
 
-export class HotelListComponent implements OnInit, OnDestroy{
+export class FavListComponent implements OnInit, OnDestroy{
   /*posts = [
     {title: "Primer post", content: "Este es el contenido del primer post" },
     {title: "Segundo post", content: "Este es el contenido del segundo post" },
@@ -29,7 +29,12 @@ export class HotelListComponent implements OnInit, OnDestroy{
     this.hotelesSub = this.hotelesService.getHotelesUpdateListener()
     .subscribe((hoteles: Hotel[]) =>{
       this.isLoading = false;
-      this.hoteles = hoteles;
+      hoteles.forEach(hotel =>{
+        console.log('favorite?', hotel.favorite);
+        if(hotel.favorite == "true"){
+          this.hoteles.push(hotel);
+        }
+      });
     });
   }
 
@@ -43,8 +48,8 @@ export class HotelListComponent implements OnInit, OnDestroy{
     console.log("Eliminado")
   }
 
-  Favorite(id: string, title: string, content: string, imagePath: string, favorite: string){
-    this.hotelesService.updateFav(id, title, content, imagePath, favorite);
+  Favorite(id: string, title: string, content: string, image: string, favorite: string){
+    this.hotelesService.updateFav(id, title, content, image, favorite);
   }
 
   /*

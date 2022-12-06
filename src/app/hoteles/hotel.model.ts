@@ -3,4 +3,5 @@ export interface Hotel{
   title: string;
   content: string;
   imagePath: string;
+  favorite: string
 }
